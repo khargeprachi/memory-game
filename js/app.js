@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-
+document.addEventListener('DOMContentLoaded', start);
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -24,8 +24,199 @@ function shuffle(array) {
 
     return array;
 }
+let sec=0,min=0,hrs=0,t;
+let count=0,num=0;
+
+function closeModal()
+{  let modal = document.querySelector('.modal');
+    modal.style.display = "none";
+    clearInterval(t);
+
+}
+function displayCard(evt) {
+    if(count<2)
+    {
+    let classes=evt.target.classList;
+    let result= classes.add('show','open');
+    count++;
+    }
+    if(count===2)
+    { num++;
+      document.querySelector('.moves').innerHTML=num;
+
+if(num==10)
+{
+  let stars=document.querySelector('.score-panel .stars li');
+  stars.remove();
+
+}
+if(num==20)
+{
+  let stars=document.querySelector('.score-panel .stars li');
+  stars.remove();
+
+}
+      check();
+      if(document.querySelectorAll('.match').length==16)
+      {
+
+                let modal = document.querySelector('.modal');
+
+                let closebtn = document.querySelector('.close');
+                let timeTaken=document.querySelector('.timer').innerHTML;
+                document.querySelector('.time').innerHTML=timeTaken;
+                document.querySelector('.rating').innerHTML=document.querySelector('.stars').innerHTML;
+                modal.style.display = "block";
+                closebtn.addEventListener('click',closeModal);
+
+      }
+    }
+
+}
+function move(card) {
+    //var elem = document.getElementById("animate");
+
+//let elem = card[0];
+
+let pos = 30;
+var id = setInterval(frame, 5);
+function frame() {
+
+  if (pos == -30) {//clearInterval(id);
+      pos1=-30;
+      var id1 = setInterval(frame1, 5);
+      function frame1() {
+        if(pos==0)
+        {
+          clearInterval(id1);
+        }
+        else {
+          {
+            pos++;
+            card[0].style.position = 'relative';
+            card[1].style.position = 'relative';
+            card[0].style.left = pos + 'px';
+            card[1].style.left = pos + 'px';
+          }
+        }
+      }
+      clearInterval(id);
+  }
+  else {
+    pos--;
+    //elem.style.top = pos + 'px';
+    //console.log(pos);
+  card[0].style.position = 'relative';
+  card[1].style.position = 'relative';
+  card[0].style.left = pos + 'px';
+  card[1].style.left = pos + 'px';
+
+  }
+}
+
+}
+
+function matched(cards)
+{
+    //event.preventdefault();
+  cards[0].classList.remove('open');
+  cards[0].classList.add('match');
+  cards[1].classList.remove('open');
+  cards[1].classList.add('match');
+  count=0;
+}
+function notmatched(cards)
+{
+
+  //event.preventDefault();
+  move(cards);
+
+//cards[0].style.animation = "move 4s 2";
+//cards[1].style.animation = "move 4s 2";
+  cards[0].classList.remove('open');
+  cards[1].classList.remove('open');
+  cards[0].classList.remove('show');
+  cards[1].classList.remove('show');
+  count=0;
+}
+function check()
+{
+openedCards=document.querySelectorAll('.open');
+let classes=[];
+for(let i=0;i<openedCards.length;i++)
+{
+  classes[i]=openedCards[i].querySelector('i').className;
+}
+
+if(classes[0]===classes[1])
+{
+  matched(openedCards);
+
+}
+else {
+  setTimeout(function() {
+    notmatched(openedCards);
+}, 450);
+
+}
+}
 
 
+function increase() {
+  sec++;
+  if(sec>=60)
+  {
+    sec=0;
+    min++;
+
+  if(min>=60)
+  {
+    min=0;
+    hrs++;
+  }
+
+}
+  let stopWatch=document.querySelector('.timer');
+  let string= `${hrs}:${min}:${sec}`;
+  stopWatch.innerHTML=string;
+  //timer();
+}
+function timer() {
+
+   t=setInterval(increase,1000);
+}
+
+function start()
+{
+  //get all cardsc
+  closeModal();
+  clearInterval(t);
+  sec=0,min=0;hrs=0,t;
+  timer();
+  count=0;
+  num=0;
+  document.querySelector('.moves').innerHTML=num;
+    let cards= document.querySelectorAll('.deck .card i');
+    let arr=[];
+    for(let i=0;i<cards.length;i++) {
+        arr[i]=cards[i].classList[1];
+    }
+    let shuffled=shuffle(arr);//shuffle cards
+    //prepare deck
+    let container=document.querySelector('.deck');
+    let text='';
+    for(let i=0;i<shuffled.length;i++){
+        text+=`<li class='card'><i class="fa ${shuffled[i]}"></i></li>`;
+    }
+    container.innerHTML=text;
+
+    cards=document.querySelectorAll('.deck .card ');
+    for( i=0;i<cards.length;i++) {
+        cards[i].addEventListener('click',displayCard);
+    }
+
+
+}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
