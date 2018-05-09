@@ -84,6 +84,7 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    box-shadow: 5px 5px 5px 5px teal;
 }
 
 /*
@@ -155,7 +156,7 @@ h1 {
     margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
+.score-panel .stars li, .rating li {
     list-style: none;
     display: inline-block;
 }
