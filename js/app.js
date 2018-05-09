@@ -24,17 +24,19 @@ function shuffle(array) {
     return array;
 }
 
-let sec=0,min=0,hrs=0,t;
+let sec=0,min=0,hrs=0,t;// for the timer
 let count=0,num=0,flag=true;
 let audioErr=document.querySelector('#errorAudio');
 let audioCor=document.querySelector('#correctAudio');
 
+//function to close modal box
 function closeModal() {
     let modal = document.querySelector('.modal');
     modal.style.display = "none";
     clearInterval(t);
 }
 
+//function to be run on winning the game to display modal
 function won() {
   let modal = document.querySelector('.modal');
   let closebtn = document.querySelector('.close');
@@ -45,8 +47,8 @@ function won() {
   closebtn.addEventListener('click',closeModal);
 }
 
+//function to open the cards selected
 function displayCard(evt) {
-
     if(count<2 && flag===true) {
         let classes=evt.target.classList;
         result= classes.add('show','open');
@@ -54,26 +56,26 @@ function displayCard(evt) {
      }
     if(count===2&&flag==true) {
       flag=false;
-        num++;
+        num++;//number of moves
         document.querySelector('.moves').innerHTML=num;
 
-        if(num==10) {
+        if(num==15) {
             let stars=document.querySelector('.score-panel .stars li');
             stars.remove();
         }
-        if(num==20) {
+        if(num==25) {
             let stars=document.querySelector('.score-panel .stars li');
             stars.remove();
         }
         openedCards=document.querySelectorAll('.open');
-        check(openedCards);
-        if(document.querySelectorAll('.match').length==16)
+        check(openedCards);//check whether two selected(openedCards) cards match or not.
+        if(document.querySelectorAll('.match').length==16)//winning condition
         {
             won();
         }
     }
 }
-//animation
+//function for 'moving' animation
 function move(card) {
     audioErr.currentTime=0;
     audioErr.play();
@@ -107,6 +109,7 @@ function move(card) {
     }
 }
 
+//function if openedCards match
 function matched(cards) {
     audioCor.currentTime=0;
     audioCor.play();
@@ -118,6 +121,7 @@ function matched(cards) {
     flag=true;
 }
 
+//function if opened cards do not match
 function notmatched(cards) {
     move(cards);
     cards[0].classList.remove('open');
@@ -129,6 +133,7 @@ function notmatched(cards) {
 
 }
 
+//function to check whether opened cards match or not
 function check(openedCards) {
     let classes=[];
     for(let i=0;i<openedCards.length;i++) {
@@ -144,6 +149,7 @@ function check(openedCards) {
     }
 }
 
+//function to increment timer
 function increase() {
     sec++;
     if(sec>=60) {
@@ -159,10 +165,12 @@ function increase() {
     stopWatch.innerHTML=string;
   }
 
+//timer function
 function timer() {
     t=setInterval(increase,1000);
 }
 
+//start function which sets all variables to initial values and prepares the deck
 function start() {
   //get all cards
   flag=true;
@@ -193,7 +201,7 @@ function start() {
     cards=document.querySelectorAll('.deck .card ');
     for( i=0;i<cards.length;i++) {
         if(count<2) {
-            cards[i].addEventListener('click',displayCard);
+            cards[i].addEventListener('click',displayCard);// add event listeners to all cards for 'click' event
         }
     }
 }
