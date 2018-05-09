@@ -26,14 +26,17 @@ function shuffle(array) {
 }
 let sec=0,min=0,hrs=0,t;
 let count=0,num=0;
-
+let audioErr=document.querySelector('#errorAudio');
+let audioCor=document.querySelector('#correctAudio');
 function closeModal()
 {  let modal = document.querySelector('.modal');
     modal.style.display = "none";
     clearInterval(t);
 
 }
+
 function displayCard(evt) {
+
   console.log(count);
   /*if(count>2)
   {
@@ -94,11 +97,13 @@ function displayCard(evt) {
 
 //}
 }
+
 function move(card) {
     //var elem = document.getElementById("animate");
 
 //let elem = card[0];
-
+audioErr.currentTime=0;
+audioErr.play();
 let pos = 20;
 var id = setInterval(frame, 1);
 function frame() {
@@ -121,6 +126,8 @@ function frame() {
           }
         }
       }
+
+
       clearInterval(id);
   }
   else {
@@ -140,6 +147,8 @@ function frame() {
 function matched(cards)
 {
     //event.preventdefault();
+    audioCor.currentTime=0;
+    audioCor.play();
   cards[0].classList.remove('open');
   cards[0].classList.add('match');
   cards[1].classList.remove('open');
