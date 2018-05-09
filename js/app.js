@@ -46,20 +46,7 @@ function won() {
 }
 
 function displayCard(evt) {
-  /*if(count>2)
-  {
-    errorCards=document.querySelectorAll('.open,.show');
-    for(let j=0;j<errorCards.length;j++)
-    {
-    errorCards[j].classList.remove('open');
-    errorCards[j].classList.remove('show');
-  }
-  let classes=evt.target.classList;
-  let result= classes.remove('open');
-   result= classes.remove('show');
-  }
-  */
-  //else {
+
     if(count<2 && flag===true) {
         let classes=evt.target.classList;
         result= classes.add('show','open');
@@ -86,7 +73,7 @@ function displayCard(evt) {
         }
     }
 }
-
+//animation
 function move(card) {
     audioErr.currentTime=0;
     audioErr.play();
@@ -134,11 +121,12 @@ function matched(cards) {
 function notmatched(cards) {
     move(cards);
     cards[0].classList.remove('open');
-    cards[1].classList.remove('open');
     cards[0].classList.remove('show');
+    cards[1].classList.remove('open');
     cards[1].classList.remove('show');
     count=0;
     flag=true;
+
 }
 
 function check(openedCards) {
