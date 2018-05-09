@@ -25,7 +25,7 @@ function shuffle(array) {
 }
 
 let sec=0,min=0,hrs=0,t;
-let count=0,num=0;
+let count=0,num=0,flag=true;
 let audioErr=document.querySelector('#errorAudio');
 let audioCor=document.querySelector('#correctAudio');
 
@@ -60,12 +60,13 @@ function displayCard(evt) {
   }
   */
   //else {
-    if(count<2) {
+    if(count<2 && flag===true) {
         let classes=evt.target.classList;
         result= classes.add('show','open');
         count++;
      }
-    if(count===2) {
+    if(count===2&&flag==true) {
+      flag=false;
         num++;
         document.querySelector('.moves').innerHTML=num;
 
@@ -127,6 +128,7 @@ function matched(cards) {
     cards[1].classList.remove('open');
     cards[1].classList.add('match');
     count=0;
+    flag=true;
 }
 
 function notmatched(cards) {
@@ -136,6 +138,7 @@ function notmatched(cards) {
     cards[0].classList.remove('show');
     cards[1].classList.remove('show');
     count=0;
+    flag=true;
 }
 
 function check(openedCards) {
@@ -149,7 +152,7 @@ function check(openedCards) {
     else {
         setTimeout(function() {
         notmatched(openedCards);
-        }, 450);
+        }, 400);
     }
 }
 
@@ -174,6 +177,7 @@ function timer() {
 
 function start() {
   //get all cards
+  flag=true;
     let star=document.createElement('STAR'); let temp='';
     for(let x=0;x<3;x++) {
         temp+="<li><i class='fa fa-star'></i></li>";
