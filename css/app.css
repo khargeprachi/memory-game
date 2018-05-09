@@ -38,42 +38,34 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
+    margin: 0 0 2em ;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
+
 .deck .card.open {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
-}
-.notmatched {
-
-    background: #ff0000;
-
 }
 
 .deck .card.show {
@@ -87,18 +79,6 @@ h1 {
     box-shadow: 5px 5px 5px 5px teal;
 }
 
-/*
-.animation {
-  animation: move 5s infinite;
-  position:absolute;
-}
-@keyframes move {
-  from {left: 0px;}
-  to {left: 200px;}
-    /*from {left: 200px;}
-    to {left: -200px;}
-}
-    */
 
 /*
  * Styles for the Score Panel
@@ -169,4 +149,96 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+@media screen and (max-width:400px) {
+  .deck {
+      width: 300px;
+      min-height: 300px;
+      padding: 32px;
+      display: flex;
+      flex-wrap: wrap;
+  }
+  .deck .card {
+      height: 50px;
+      width: 50px;
+      padding: 10px;
+  }
+  .score-panel{
+    width:300px;
+  }
+}
+@media screen and (min-width:401px) and (max-width:400px){
+  .deck {
+      width: 350px;
+      min-height: 350px;
+      padding: 40px;
+      display: flex;
+      flex-wrap: wrap;
+  }
+  .deck .card {
+      height: 60px;
+      width: 60px;
+      display: flex;
+      padding: 20px;
+  }
+  .score-panel {
+    width:350px;
+  }
+}
+@media screen and (min-width:401px) and (max-width:600px){
+  .deck {
+      width: 350px;
+      min-height: 350px;
+      padding: 40px;
+      display: flex;
+      flex-wrap: wrap;
+  }
+  .deck .card {
+      height: 60px;
+      width: 60px;
+      display: flex;
+      padding: 20px;
+  }
+  .score-panel {
+    width:350px;
+  }
+}
+@media screen and (min-width:601px) and (max-width:800px){
+  .deck {
+      width: 450px;
+      min-height: 450px;
+      padding: 48px;
+      display: flex;
+      flex-wrap: wrap;
+  }
+  .deck .card {
+      height: 80px;
+      width: 80px;
+      display: flex;
+      padding: 30px;
+
+  }
+  .score-panel{
+    width:450px;
+    font-size:20px;
+  }
+}
+@media screen and (min-width:801px) {
+  .deck {
+      width: 500px;
+      min-height: 500px;
+      padding: 55px;
+      display: flex;
+      flex-wrap: wrap;
+  }
+  .deck .card {
+      height: 90px;
+      width: 90px;
+      display: flex;
+      padding: 30px;
+  }
+  .score-panel{
+    width:500px;
+    font-size:30px;
+  }
 }
