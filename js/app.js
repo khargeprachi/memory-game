@@ -33,11 +33,12 @@ let audioCor=document.querySelector('#correctAudio');
 function closeModal() {
     let modal = document.querySelector('.modal');
     modal.style.display = "none";
-    clearInterval(t);
+
 }
 
 //function to be run on winning the game to display modal
 function won() {
+  clearInterval(t);
   let modal = document.querySelector('.modal');
   let closebtn = document.querySelector('.close');
   let timeTaken=document.querySelector('.timer').innerHTML;
